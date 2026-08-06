@@ -2,10 +2,6 @@
 
 A drag-and-drop landing page builder for Nigerian small businesses. Build a one-page site from ready-made blocks, publish it to a subdomain or custom domain, and collect leads — no code required.
 
-## Status
-
-Early development (Phase 1 — schema and skeleton). Block rendering, the editor, publishing, and billing are not built yet. See [04-page-builder.md](04-page-builder.md) for the full build plan.
-
 ## Stack
 
 - **Next.js** (App Router) + TypeScript
