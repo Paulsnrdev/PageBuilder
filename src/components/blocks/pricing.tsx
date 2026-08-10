@@ -1,12 +1,13 @@
 import { FaCheck, FaXmark } from "react-icons/fa6";
 
 import type { PricingContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
 import { SectionHeading } from "@/components/blocks/section-heading";
 
 export function Pricing({ content }: { content: PricingContent }) {
   return (
     <div>
-      <SectionHeading heading={content.heading} subheading={content.subheading} />
+      <SectionHeading heading={content.heading} subheading={content.subheading} showSubheading />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {content.tiers.map((tier, i) => (
           <div
@@ -18,11 +19,14 @@ export function Pricing({ content }: { content: PricingContent }) {
             }`}
           >
             <div>
-              <h3 className="font-(family-name:--theme-font-heading) text-lg font-semibold">
-                {tier.name}
-              </h3>
+              <EditableText
+                as="h3"
+                path={`tiers.${i}.name`}
+                value={tier.name}
+                className="block font-(family-name:--theme-font-heading) text-lg font-semibold"
+              />
               <p className="mt-2 flex items-baseline gap-1">
-                <span className="text-3xl font-semibold tracking-tight">{tier.price}</span>
+                <EditableText as="span" path={`tiers.${i}.price`} value={tier.price} className="block text-3xl font-semibold tracking-tight" />
                 {tier.period && (
                   <span className="text-sm text-(--theme-color-muted)">/{tier.period}</span>
                 )}
@@ -36,9 +40,12 @@ export function Pricing({ content }: { content: PricingContent }) {
                   ) : (
                     <FaXmark className="mt-0.5 shrink-0 text-(--theme-color-muted)" size={14} />
                   )}
-                  <span className={feature.included ? "" : "text-(--theme-color-muted) line-through"}>
-                    {feature.text}
-                  </span>
+                  <EditableText
+                    as="span"
+                    path={`tiers.${i}.features.${j}.text`}
+                    value={feature.text}
+                    className={feature.included ? "" : "text-(--theme-color-muted) line-through"}
+                  />
                 </li>
               ))}
             </ul>

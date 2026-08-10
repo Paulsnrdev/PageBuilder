@@ -1,6 +1,9 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 import type { BlockSettings } from "@/lib/blocks/schema";
+import { useEditorMode } from "@/lib/editor/editor-mode-context";
 
 const paddingMultiplier: Record<BlockSettings["paddingY"], number> = {
   none: 0,
@@ -22,7 +25,8 @@ const containerWidthClass: Record<BlockSettings["containerWidth"], string> = {
  * site theme's spacing unit, so block padding scales with the theme.
  */
 export function BlockSection({ settings, children }: { settings: BlockSettings; children: ReactNode }) {
-  if (settings.hidden) return null;
+  const editor = useEditorMode();
+  if (settings.hidden && !editor) return null;
 
   const paddingRem = `calc(var(--theme-space-unit) * ${paddingMultiplier[settings.paddingY]})`;
 

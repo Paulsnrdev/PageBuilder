@@ -1,6 +1,7 @@
 import { FaStar } from "react-icons/fa6";
 
 import type { TestimonialsContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
 import { SectionHeading } from "@/components/blocks/section-heading";
 
 export function Testimonials({ content }: { content: TestimonialsContent }) {
@@ -17,14 +18,23 @@ export function Testimonials({ content }: { content: TestimonialsContent }) {
                 ))}
               </div>
             )}
-            <p className="text-(--theme-color-foreground)">&ldquo;{item.quote}&rdquo;</p>
+            <p className="text-(--theme-color-foreground)">
+              &ldquo;
+              <EditableText as="span" path={`items.${i}.quote`} value={item.quote} />
+              &rdquo;
+            </p>
             <div className="mt-auto flex items-center gap-3">
               {item.avatar && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={item.avatar.url} alt={item.avatar.alt} className="h-10 w-10 rounded-full object-cover" />
               )}
               <div>
-                <p className="text-sm font-semibold">{item.authorName}</p>
+                <EditableText
+                  as="p"
+                  path={`items.${i}.authorName`}
+                  value={item.authorName}
+                  className="block text-sm font-semibold"
+                />
                 {item.authorRole && (
                   <p className="text-sm text-(--theme-color-muted)">{item.authorRole}</p>
                 )}

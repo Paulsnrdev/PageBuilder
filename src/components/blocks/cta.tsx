@@ -1,12 +1,23 @@
+"use client";
+
 import type { CtaContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
+import { useEditorMode } from "@/lib/editor/editor-mode-context";
 
 export function Cta({ content }: { content: CtaContent }) {
+  const editor = useEditorMode();
+
   return (
     <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 rounded-3xl bg-(--theme-color-primary) px-8 py-16 text-center text-white">
-      <h2 className="font-(family-name:--theme-font-heading) text-3xl font-semibold tracking-tight sm:text-4xl">
-        {content.heading}
-      </h2>
-      {content.subheading && <p className="max-w-xl text-white/80">{content.subheading}</p>}
+      <EditableText
+        as="h2"
+        path="heading"
+        value={content.heading}
+        className="block font-(family-name:--theme-font-heading) text-3xl font-semibold tracking-tight sm:text-4xl"
+      />
+      {(content.subheading || editor) && (
+        <EditableText as="p" path="subheading" value={content.subheading ?? ""} className="block max-w-xl text-white/80" />
+      )}
       <div className="flex flex-wrap justify-center gap-4">
         <a
           href={content.primaryCta.href}

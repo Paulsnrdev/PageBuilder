@@ -1,6 +1,7 @@
 import { FaWhatsapp } from "react-icons/fa6";
 
 import type { WhatsappButtonContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
 
 function buildWhatsAppLink(content: WhatsappButtonContent) {
   const digits = content.phoneNumber.replace(/[^\d]/g, "");
@@ -34,7 +35,7 @@ export function WhatsappButton({ content }: { content: WhatsappButtonContent }) 
         className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
       >
         <FaWhatsapp size={18} />
-        {content.label}
+        <EditableText as="span" path="label" value={content.label} />
       </a>
     </div>
   );

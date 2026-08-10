@@ -1,14 +1,25 @@
+"use client";
+
 import type { FooterContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
 import { socialIconByPlatform } from "@/lib/blocks/social-icons";
+import { useEditorMode } from "@/lib/editor/editor-mode-context";
 
 export function Footer({ content }: { content: FooterContent }) {
+  const editor = useEditorMode();
+
   return (
     <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
       <div>
-        <p className="font-(family-name:--theme-font-heading) text-lg font-semibold">
-          {content.businessName}
-        </p>
-        {content.tagline && <p className="mt-1 text-sm text-(--theme-color-muted)">{content.tagline}</p>}
+        <EditableText
+          as="p"
+          path="businessName"
+          value={content.businessName}
+          className="block font-(family-name:--theme-font-heading) text-lg font-semibold"
+        />
+        {(content.tagline || editor) && (
+          <EditableText as="p" path="tagline" value={content.tagline ?? ""} className="mt-1 block text-sm text-(--theme-color-muted)" />
+        )}
       </div>
 
       {content.links.length > 0 && (
@@ -34,8 +45,13 @@ export function Footer({ content }: { content: FooterContent }) {
         </div>
       )}
 
-      {content.copyrightText && (
-        <p className="w-full text-xs text-(--theme-color-muted) sm:text-right">{content.copyrightText}</p>
+      {(content.copyrightText || editor) && (
+        <EditableText
+          as="p"
+          path="copyrightText"
+          value={content.copyrightText ?? ""}
+          className="block w-full text-xs text-(--theme-color-muted) sm:text-right"
+        />
       )}
     </div>
   );

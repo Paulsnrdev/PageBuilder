@@ -1,5 +1,9 @@
+"use client";
+
 import type { FeaturesContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
 import { SectionHeading } from "@/components/blocks/section-heading";
+import { useEditorMode } from "@/lib/editor/editor-mode-context";
 
 const columnsClass = {
   2: "sm:grid-cols-2",
@@ -8,9 +12,11 @@ const columnsClass = {
 };
 
 export function Features({ content }: { content: FeaturesContent }) {
+  const editor = useEditorMode();
+
   return (
     <div>
-      <SectionHeading heading={content.heading} subheading={content.subheading} />
+      <SectionHeading heading={content.heading} subheading={content.subheading} showSubheading />
       <div className={`grid grid-cols-1 gap-8 ${columnsClass[content.columns]}`}>
         {content.items.map((item, i) => (
           <div key={i} className="flex flex-col gap-3">
@@ -19,11 +25,19 @@ export function Features({ content }: { content: FeaturesContent }) {
                 {item.icon}
               </div>
             )}
-            <h3 className="font-(family-name:--theme-font-heading) text-lg font-semibold">
-              {item.title}
-            </h3>
-            {item.description && (
-              <p className="text-(--theme-color-muted)">{item.description}</p>
+            <EditableText
+              as="h3"
+              path={`items.${i}.title`}
+              value={item.title}
+              className="block font-(family-name:--theme-font-heading) text-lg font-semibold"
+            />
+            {(item.description || editor) && (
+              <EditableText
+                as="p"
+                path={`items.${i}.description`}
+                value={item.description ?? ""}
+                className="block text-(--theme-color-muted)"
+              />
             )}
           </div>
         ))}

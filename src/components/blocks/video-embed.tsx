@@ -1,5 +1,9 @@
+"use client";
+
 import type { VideoEmbedContent } from "@/lib/blocks/schema";
+import { EditableText } from "@/components/blocks/editable-text";
 import { toEmbedUrl } from "@/lib/blocks/video-embed-url";
+import { useEditorMode } from "@/lib/editor/editor-mode-context";
 
 const aspectClass = {
   "16:9": "aspect-video",
@@ -8,6 +12,8 @@ const aspectClass = {
 };
 
 export function VideoEmbed({ content }: { content: VideoEmbedContent }) {
+  const editor = useEditorMode();
+
   return (
     <figure className="mx-auto max-w-3xl">
       <div className={`w-full overflow-hidden rounded-2xl ${aspectClass[content.aspectRatio]}`}>
@@ -18,10 +24,13 @@ export function VideoEmbed({ content }: { content: VideoEmbedContent }) {
           allowFullScreen
         />
       </div>
-      {content.caption && (
-        <figcaption className="mt-3 text-center text-sm text-(--theme-color-muted)">
-          {content.caption}
-        </figcaption>
+      {(content.caption || editor) && (
+        <EditableText
+          as="figcaption"
+          path="caption"
+          value={content.caption ?? ""}
+          className="mt-3 block text-center text-sm text-(--theme-color-muted)"
+        />
       )}
     </figure>
   );
