@@ -68,18 +68,23 @@ model VerificationToken {
 // ─── Product models ────────────────────────────────────────────────────
 
 model Site {
-  id                String   @id @default(cuid())
-  userId            String
-  name              String
-  slug              String   @unique
-  customDomain      String?  @unique
-  faviconUrl        String?
-  metaTitle         String?
-  metaDescription   String?
-  ogImageUrl        String?
-  isPublished       Boolean  @default(false)
-  publishedAt       DateTime?
-  theme             Json // colours, fonts, spacing scale
+  id                     String    @id @default(cuid())
+  userId                 String
+  name                   String
+  slug                   String    @unique
+  customDomain           String?   @unique
+  customDomainVerifiedAt DateTime?
+  faviconUrl             String?
+  metaTitle              String?
+  metaDescription        String?
+  ogImageUrl             String?
+  isPublished            Boolean   @default(false)
+  publishedAt            DateTime?
+  // Full {name, theme, blocks, meta...} snapshot taken at publish time. The
+  // public site renders this, not the live draft, so edits stay invisible
+  // until the next publish.
+  publishedSnapshot      Json?
+  theme                  Json // colours, fonts, spacing scale
 
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   blocks Block[]

@@ -9,7 +9,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   // CLI-only (migrate, studio, introspect). The app's runtime client uses
-  // DATABASE_URL (pooled) directly via the PrismaPg adapter — see src/lib/prisma.ts.
+  // DATABASE_URL (pooled) directly via the PrismaPg adapter. See src/lib/prisma.ts.
   datasource: {
     url: process.env["DIRECT_URL"],
   },
