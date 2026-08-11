@@ -7,10 +7,10 @@ export const PLAN_LIMITS: Record<SubscriptionPlan, { maxSites: number; customDom
   BUSINESS: { maxSites: Infinity, customDomain: true, branding: false, leadExport: true },
 };
 
-export const PLAN_PRICING: Record<SubscriptionPlan, { label: string; priceNaira: number }> = {
-  FREE: { label: "Free", priceNaira: 0 },
-  PRO: { label: "Pro", priceNaira: 6000 },
-  BUSINESS: { label: "Business", priceNaira: 15000 },
+export const PLAN_PRICING: Record<SubscriptionPlan, { label: string; priceNaira: number; yearlyPriceNaira: number }> = {
+  FREE: { label: "Free", priceNaira: 0, yearlyPriceNaira: 0 },
+  PRO: { label: "Pro", priceNaira: 6000, yearlyPriceNaira: 60000 },
+  BUSINESS: { label: "Business", priceNaira: 15000, yearlyPriceNaira: 150000 },
 };
 
 /** A subscription only exists once someone has gone through checkout; no row means Free. */

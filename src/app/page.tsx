@@ -98,6 +98,9 @@ export default function Home() {
                     {PLAN_PRICING[planId].priceNaira === 0 ? "Free" : `₦${PLAN_PRICING[planId].priceNaira.toLocaleString()}`}
                     {PLAN_PRICING[planId].priceNaira > 0 && <span className="text-sm font-normal text-zinc-500">/month</span>}
                   </p>
+                  {PLAN_PRICING[planId].priceNaira > 0 && (
+                    <p className="text-xs text-zinc-400">or ₦{PLAN_PRICING[planId].yearlyPriceNaira.toLocaleString()}/year, 2 months free</p>
+                  )}
                 </div>
                 <ul className="flex flex-1 flex-col gap-2 text-sm text-zinc-600">
                   {PLAN_FEATURES[planId].map((feature) => (

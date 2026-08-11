@@ -3,8 +3,8 @@ import type { SubscriptionPlan } from "@/generated/prisma/enums";
 
 function planFromCode(planCode: string | null): SubscriptionPlan | null {
   if (!planCode) return null;
-  if (planCode === process.env.PAYSTACK_PRO_PLAN_CODE) return "PRO";
-  if (planCode === process.env.PAYSTACK_BUSINESS_PLAN_CODE) return "BUSINESS";
+  if (planCode === process.env.PAYSTACK_PRO_MONTHLY_PLAN_CODE || planCode === process.env.PAYSTACK_PRO_YEARLY_PLAN_CODE) return "PRO";
+  if (planCode === process.env.PAYSTACK_BUSINESS_MONTHLY_PLAN_CODE || planCode === process.env.PAYSTACK_BUSINESS_YEARLY_PLAN_CODE) return "BUSINESS";
   return null;
 }
 

@@ -61,7 +61,11 @@ export default async function BillingPage() {
                   Downgrade by cancelling
                 </span>
               ) : (
-                <UpgradeButton plan={planId} />
+                <UpgradeButton
+                  plan={planId}
+                  monthlyPriceNaira={PLAN_PRICING[planId].priceNaira}
+                  yearlyPriceNaira={PLAN_PRICING[planId].yearlyPriceNaira}
+                />
               )}
             </div>
           );

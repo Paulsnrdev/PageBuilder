@@ -1,24 +1,24 @@
 # Page Builder
 
-A drag-and-drop landing page builder for Nigerian small businesses. Build a one-page site from ready-made blocks, publish it to a subdomain or custom domain, and collect leads — no code required.
+A drag-and-drop landing page builder for Nigerian small businesses. Build a one-page site from ready-made blocks, publish it to a subdomain or custom domain, and collect leads, no code required.
 
 ## Stack
 
 - **Next.js** (App Router) + TypeScript
 - **Tailwind CSS**
 - **Prisma** + **PostgreSQL** (Neon / Supabase)
-- **Auth.js** — Google sign-in
-- **Cloudinary** — image uploads
-- **Resend** — transactional email
-- **Paystack** — billing
-- **Vercel** — hosting + Domains API for custom domains
+- **Auth.js**: Google sign-in
+- **Cloudinary**: image uploads
+- **Resend**: transactional email
+- **Paystack**: billing
+- **Vercel**: hosting + Domains API for custom domains
 
 ## Data model
 
-- `Site` — a user's page: slug, custom domain, theme (colours/fonts/spacing), publish state
-- `Block` — one of 15 types (Hero, Text, Image, Gallery, Features, Testimonials, Pricing, FAQ, CTA, Contact Form, WhatsApp Button, Video Embed, Social Links, Footer, Spacer), each with its own `content` shape validated by Zod
-- `Lead` — a contact form submission tied to a site and block
-- `Subscription` — Paystack plan and billing status per user
+- `Site`: a user's page: slug, custom domain, theme (colours/fonts/spacing), publish state
+- `Block`: one of 15 types (Hero, Text, Image, Gallery, Features, Testimonials, Pricing, FAQ, CTA, Contact Form, WhatsApp Button, Video Embed, Social Links, Footer, Spacer), each with its own `content` shape validated by Zod
+- `Lead`: a contact form submission tied to a site and block
+- `Subscription`: Paystack plan and billing status per user
 
 See [prisma/schema.prisma](prisma/schema.prisma) and [src/lib/blocks/schema.ts](src/lib/blocks/schema.ts).
 
@@ -73,7 +73,8 @@ See [prisma/schema.prisma](prisma/schema.prisma) and [src/lib/blocks/schema.ts](
 | `RESEND_API_KEY` | Lead notification emails | Resend dashboard. Missing key: leads still save, the email is just skipped. |
 | `PAYSTACK_SECRET_KEY`, `PAYSTACK_PUBLIC_KEY` | Billing | Paystack dashboard → API keys. |
 | `PAYSTACK_PRO_PLAN_CODE`, `PAYSTACK_BUSINESS_PLAN_CODE` | Billing | Create the Pro and Business plans in the Paystack dashboard first, then copy their plan codes here. |
+| `PAYSTACK_WEBHOOK_FORWARD_URL` | Billing, only if this Paystack business is shared with another app | The other app's webhook URL. Paystack allows one webhook URL per business, so this route forwards any event that isn't tagged with a Page Builder plan code. |
 | `VERCEL_API_TOKEN`, `VERCEL_PROJECT_ID`, `VERCEL_TEAM_ID` | Custom domains | Vercel account settings → tokens, and the project's own settings page. |
 | `NEXT_PUBLIC_APP_URL` | Billing callback, sitemap, metadata | The site's full public URL, e.g. `https://yourapp.com`. |
 
-Also add a webhook in the Paystack dashboard pointing at `/api/paystack/webhook` — it's what keeps subscriptions in sync after checkout.
+Also add a webhook in the Paystack dashboard pointing at `/api/paystack/webhook`. It's what keeps subscriptions in sync after checkout.
