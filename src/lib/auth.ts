@@ -5,8 +5,29 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import { prisma } from "@/lib/prisma";
 import { devLoginEnabled } from "@/lib/auth/dev-login";
+import { loginSchema } from "@/lib/auth/credentials-schema";
+import { verifyPassword } from "@/lib/auth/password";
 
-const providers: NextAuthConfig["providers"] = [Google];
+const providers: NextAuthConfig["providers"] = [
+  Google,
+  Credentials({
+    id: "credentials",
+    name: "Credentials",
+    credentials: { email: { label: "Email", type: "email" }, password: { label: "Password", type: "password" } },
+    async authorize(credentials) {
+      const parsed = loginSchema.safeParse(credentials);
+      if (!parsed.success) return null;
+
+      const user = await prisma.user.findUnique({ where: { email: parsed.data.email } });
+      if (!user?.password) return null;
+
+      const valid = await verifyPassword(parsed.data.password, user.password);
+      if (!valid) return null;
+
+      return { id: user.id, name: user.name, email: user.email, image: user.image };
+    },
+  }),
+];
 
 if (devLoginEnabled) {
   providers.push(
