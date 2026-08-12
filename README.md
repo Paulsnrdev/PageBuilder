@@ -69,10 +69,11 @@ See [prisma/schema.prisma](prisma/schema.prisma) and [src/lib/blocks/schema.ts](
 | `AUTH_SECRET` | Sign-in | Generate with `npx auth secret`. |
 | `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` | Google sign-in | Google Cloud Console → OAuth client credentials. Not required if `ENABLE_DEV_LOGIN` is on. |
 | `ENABLE_DEV_LOGIN` | Local/staging testing only | Set to `"true"` to enable an email-only login with no password. Never set this in a real production deploy. |
+| `ADMIN_EMAILS` | Access to `/admin` | Comma-separated list of emails allowed to view the admin overview. |
 | `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Image uploads in the editor | Cloudinary dashboard. |
 | `RESEND_API_KEY` | Lead notification emails | Resend dashboard. Missing key: leads still save, the email is just skipped. |
 | `PAYSTACK_SECRET_KEY`, `PAYSTACK_PUBLIC_KEY` | Billing | Paystack dashboard → API keys. |
-| `PAYSTACK_PRO_PLAN_CODE`, `PAYSTACK_BUSINESS_PLAN_CODE` | Billing | Create the Pro and Business plans in the Paystack dashboard first, then copy their plan codes here. |
+| `PAYSTACK_PRO_MONTHLY_PLAN_CODE`, `PAYSTACK_PRO_YEARLY_PLAN_CODE`, `PAYSTACK_BUSINESS_MONTHLY_PLAN_CODE`, `PAYSTACK_BUSINESS_YEARLY_PLAN_CODE` | Billing | Create the four plans (Pro/Business x Monthly/Yearly) in the Paystack dashboard first, then copy their plan codes here. |
 | `PAYSTACK_WEBHOOK_FORWARD_URL` | Billing, only if this Paystack business is shared with another app | The other app's webhook URL. Paystack allows one webhook URL per business, so this route forwards any event that isn't tagged with a Page Builder plan code. |
 | `VERCEL_API_TOKEN`, `VERCEL_PROJECT_ID`, `VERCEL_TEAM_ID` | Custom domains | Vercel account settings → tokens, and the project's own settings page. |
 | `NEXT_PUBLIC_APP_URL` | Billing callback, sitemap, metadata | The site's full public URL, e.g. `https://yourapp.com`. |
