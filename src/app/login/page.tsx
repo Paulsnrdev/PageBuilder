@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { FcGoogle } from "react-icons/fc";
 
 import { googleLogin, devLogin, credentialsLogin } from "@/lib/auth/actions";
 import { devLoginEnabled } from "@/lib/auth/dev-login";
 import { authErrorMessage } from "@/lib/auth/error-messages";
 import { AuthShell } from "@/components/auth/auth-shell";
+import { PasswordInput } from "@/components/auth/password-input";
 
 const inputClass =
   "w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm focus:border-zinc-500 focus:outline-none";
@@ -13,20 +15,22 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const errorMessage = authErrorMessage(typeof error === "string" ? error : undefined);
 
   return (
-    <AuthShell title="Sign in" subtitle="Build and publish your landing page.">
-      <div className="flex flex-col gap-6">
+    <AuthShell greeting="👋 Welcome back" subtitle="Sign in to keep building.">
+      <div className="flex flex-col gap-5">
         {errorMessage && (
           <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
             {errorMessage}
           </p>
         )}
 
-        <form action={googleLogin}>
+        <form action={credentialsLogin} className="flex flex-col gap-3">
+          <input type="email" name="email" required placeholder="Email" className={inputClass} />
+          <PasswordInput name="password" required minLength={8} placeholder="Password" className={inputClass} />
           <button
             type="submit"
-            className="w-full rounded-full border border-zinc-300 px-4 py-2.5 text-sm font-medium transition hover:bg-zinc-50"
+            className="w-full rounded-full bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800"
           >
-            Continue with Google
+            Sign in
           </button>
         </form>
 
@@ -36,14 +40,13 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
           <div className="h-px flex-1 bg-zinc-200" />
         </div>
 
-        <form action={credentialsLogin} className="flex flex-col gap-3">
-          <input type="email" name="email" required placeholder="you@example.com" className={inputClass} />
-          <input type="password" name="password" required minLength={8} placeholder="Password" className={inputClass} />
+        <form action={googleLogin}>
           <button
             type="submit"
-            className="w-full rounded-full bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-zinc-300 px-4 py-2.5 text-sm font-medium transition hover:bg-zinc-50"
           >
-            Sign in
+            <FcGoogle size={18} />
+            Continue with Google
           </button>
         </form>
 
