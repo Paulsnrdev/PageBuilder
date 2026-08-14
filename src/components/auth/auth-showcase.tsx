@@ -1,6 +1,8 @@
+import Image from "next/image";
+
 // Decorative panel for the auth screens. Deliberately not a customer
-// testimonial (no real quote to show yet) — an abstract wireframe of a
-// published page instead, built from our own real tagline.
+// testimonial (no real quote to show yet) — a screenshot of the actual
+// demo page (/preview/demo) instead, built from our own real tagline.
 export function AuthShowcase() {
   return (
     <div className="relative hidden overflow-hidden rounded-2xl bg-zinc-950 p-10 md:flex md:w-[46%] md:flex-col md:justify-between">
@@ -24,16 +26,14 @@ export function AuthShowcase() {
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         </div>
-        <div className="space-y-3 p-6">
-          <div className="h-3 w-2/3 rounded bg-white/25" />
-          <div className="h-2 w-4/5 rounded bg-white/10" />
-          <div className="h-2 w-3/5 rounded bg-white/10" />
-          <div className="mt-4 h-8 w-32 rounded-full bg-white/90" />
-          <div className="mt-6 grid grid-cols-3 gap-3">
-            <div className="h-16 rounded-lg bg-white/5" />
-            <div className="h-16 rounded-lg bg-white/5" />
-            <div className="h-16 rounded-lg bg-white/5" />
-          </div>
+        <div className="relative h-64 w-full">
+          <Image
+            src="/marketing/auth-showcase.png"
+            alt="A landing page built with Page Builder"
+            fill
+            unoptimized
+            className="object-cover object-top"
+          />
         </div>
       </div>
     </div>
