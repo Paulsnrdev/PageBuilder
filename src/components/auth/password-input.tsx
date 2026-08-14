@@ -31,7 +31,8 @@ export function PasswordInput({
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
-        className="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400 transition hover:text-zinc-600"
+        className="flex items-center px-3 text-zinc-400 transition hover:text-zinc-600"
+        style={{ position: "absolute", top: 0, bottom: 0, right: 0 }}
         aria-label={visible ? "Hide password" : "Show password"}
       >
         {visible ? <FaEyeSlash size={14} /> : <FaEye size={14} />}
