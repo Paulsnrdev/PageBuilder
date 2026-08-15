@@ -4,6 +4,7 @@ import { FaCheck, FaWandMagicSparkles, FaLayerGroup, FaWhatsapp, FaGlobe } from 
 
 import { templates } from "@/lib/templates";
 import { PLAN_LIMITS, PLAN_PRICING } from "@/lib/billing/plan";
+import { ScrollReveal } from "@/components/marketing/scroll-reveal";
 
 const PLAN_ORDER = ["FREE", "PRO", "BUSINESS"] as const;
 
@@ -107,55 +108,55 @@ export default function Home() {
 
         <section className="border-y border-zinc-100 bg-zinc-50 py-16">
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map((feature) => (
-              <div key={feature.title}>
+            {FEATURES.map((feature, i) => (
+              <ScrollReveal key={feature.title} delayMs={i * 75}>
                 <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600/10 text-indigo-600">
                   <feature.icon size={18} />
                 </div>
                 <p className="mt-4 font-semibold">{feature.title}</p>
                 <p className="mt-2 text-sm text-zinc-600">{feature.description}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
         <section id="templates" className="mx-auto max-w-5xl px-6 py-20">
-          <div className="mx-auto max-w-xl text-center">
+          <ScrollReveal className="mx-auto max-w-xl text-center">
             <h2 className="text-3xl font-semibold tracking-tight">Start from a template that already looks good</h2>
             <p className="mt-3 text-zinc-600">Every template comes filled with real sample content, so you edit instead of starting from nothing.</p>
-          </div>
+          </ScrollReveal>
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {templates.map((template) => (
-              <div
-                key={template.id}
-                className="group overflow-hidden rounded-xl border border-zinc-200 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={template.previewImageUrl}
-                  alt=""
-                  className="h-40 w-full object-cover transition duration-300 group-hover:scale-105"
-                />
-                <div className="p-4">
-                  <p className="font-medium">{template.name}</p>
-                  <p className="mt-1 text-sm text-zinc-500">{template.description}</p>
+            {templates.map((template, i) => (
+              <ScrollReveal key={template.id} delayMs={(i % 3) * 75}>
+                <div className="group overflow-hidden rounded-xl border border-zinc-200 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={template.previewImageUrl}
+                    alt=""
+                    className="h-40 w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                  <div className="p-4">
+                    <p className="font-medium">{template.name}</p>
+                    <p className="mt-1 text-sm text-zinc-500">{template.description}</p>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
         <section id="pricing" className="border-t border-zinc-100 bg-zinc-50 py-20">
-          <div className="mx-auto max-w-xl text-center">
+          <ScrollReveal className="mx-auto max-w-xl text-center">
             <h2 className="text-3xl font-semibold tracking-tight">Simple pricing</h2>
             <p className="mt-3 text-zinc-600">Start free. Upgrade when you need a custom domain or more sites.</p>
-          </div>
+          </ScrollReveal>
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 px-6 sm:grid-cols-3">
-            {PLAN_ORDER.map((planId) => {
+            {PLAN_ORDER.map((planId, i) => {
               const highlighted = planId === "PRO";
               return (
-                <div
+                <ScrollReveal
                   key={planId}
+                  delayMs={i * 75}
                   className={
                     highlighted
                       ? "relative flex flex-col gap-4 rounded-xl border-2 border-indigo-600 bg-white p-6 shadow-lg shadow-indigo-600/10"
@@ -195,7 +196,7 @@ export default function Home() {
                   >
                     Get started
                   </Link>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -203,7 +204,7 @@ export default function Home() {
         </section>
 
         <section className="px-6 py-20">
-          <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-zinc-950 px-6 py-16 text-center">
+          <ScrollReveal className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-zinc-950 px-6 py-16 text-center">
             <div
               className="pointer-events-none absolute inset-0 opacity-40"
               style={{
@@ -221,7 +222,7 @@ export default function Home() {
             >
               Get started free
             </Link>
-          </div>
+          </ScrollReveal>
         </section>
       </main>
 
