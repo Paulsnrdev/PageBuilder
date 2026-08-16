@@ -76,7 +76,7 @@ export default function Home() {
 
           <div className="relative mx-auto max-w-3xl px-6 py-20 text-center sm:py-28">
             <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-xs font-medium text-indigo-700">
-              Built for Nigerian small businesses
+              Built for small businesses and entrepreneurs worldwide. <span className="ml-1 font-normal text-indigo-600">No code required.</span>
             </span>
             <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
               Build your business a{" "}
